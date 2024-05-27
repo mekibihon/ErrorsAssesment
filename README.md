@@ -4,7 +4,7 @@ This Solidity program is a simple "FunctionsErrors" program that demonstrates th
 
 ## Description
 
-This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain.
+This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. Smart contract that implements the require(), assert() and revert() statements.
 
 ## Getting Started
 
