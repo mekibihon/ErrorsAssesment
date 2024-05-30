@@ -20,28 +20,38 @@ pragma solidity 0.8.18;
 contract FunctionsErrors {
 
   // public variables here
-    string public tokenName = "METACRAFT";
-    string public tokenAbbrv = "MTC";
-    uint public totalSupply = 0;
-    uint public minimumMintable = 100;
+    string public bookShop = "MetaBook";
+    uint public totalBorrowed = 0;
+    uint public maximumBooks = 10;
 
     // mapping variable here
-    mapping (address => uint) public balances;
+    mapping (address => uint) public borrowed;
 
-    // mint function
-    function mint (address _address, uint _value) public {
+    // lending function
+    function lend (address _name, uint _value) public {
 
         // implementing a require() statement
-        require(_address == msg.sender, "Only the token owner can mint MTC tokens");
+        require(_name == msg.sender, "Only registered student can borrow books");
 
         // implementing a revert statement
-        if (_value < minimumMintable) {
-            revert("Minimum amount of MTC token mintable must be matched or exceeded");
+        if (_value > maximumBooks) {
+            revert("Maximum of books per student");
         } else {
-            totalSupply += _value;
-            balances[_address] += _value;
+            totalBorrowed += _value;
+            borrowed[_name] += _value;
         }  
     }
+
+    // return function
+    function returned (address _name, uint _value) public {
+
+        // implementing an assert() statement
+        assert(borrowed[_name] >= _value);
+        totalBorrowed -= _value;
+        borrowed[_name] -= _value;
+      }
+
+}
 
     // burn function
     function burn (address _address, uint _value) public {
